@@ -41,27 +41,27 @@ echo $TARGETARN
 # aws elbv2 create-target-group --name $8 --protocol HTTP --port 80 --target-type instance --vpc-id vpc-eaed8283 --output=text
 #
 
-echo "Creating ELBv2 Elastic Load Balancer..."
+#echo "Creating ELBv2 Elastic Load Balancer..."
 #https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/create-load-balancer.html
-ELBARN=$(aws elbv2 create-load-balancer --name $9 --subnets $SUBNET2A $SUBNET2B --output=text)
-echo $ELBARN
+#ELBARN=$(aws elbv2 create-load-balancer --name $9 --subnets $SUBNET2A $SUBNET2B --output=text)
+#echo $ELBARN
 
 # AWS elbv2 wait for load-balancer available
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elbv2/wait/load-balancer-available.html
-echo "Waiting for load balancer to be available..."
-aws elbv2 wait load-balancer-available --load-balancer-arns $ELBARN 
-echo "Load balancer available..."
+#echo "Waiting for load balancer to be available..."
+#aws elbv2 wait load-balancer-available --load-balancer-arns $ELBARN 
+#echo "Load balancer available..."
 # create AWS elbv2 listener for HTTP on port 80
 #https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elbv2/create-listener.html
-aws elbv2 create-listener \
+#aws elbv2 create-listener \
     --load-balancer-arn $ELBARN \
     --protocol HTTP \
     --port 80  \
     --default-actions Type=forward,TargetGroupArn=$TARGETARN
 
-echo "Beginning to create and launch instances..."
+#echo "Beginning to create and launch instances..."
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/run-instances.html
-aws ec2 run-instances \
+#aws ec2 run-instances \
     --image-id $1\
     --instance-type $2\
     --count $5 \
@@ -75,10 +75,10 @@ aws ec2 run-instances \
 INSTANCEIDS=$(aws ec2 describe-instances --output=text --query 'Reservations[*].Instances[*].InstanceId' --filter "Name=instance-state-name,Values=running,pending")
 
 #https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/wait/instance-running.html
-echo "Waiting until instances are in the RUNNING state..."
-echo $INSTANCEIDS
+#echo "Waiting until instances are in the RUNNING state..."
+#echo $INSTANCEIDS
 
-if [ "$INSTANCEIDS" != "" ]
+#if [ "$INSTANCEIDS" != "" ]
   then
     aws ec2 wait instance-running --instance-ids $INSTANCEIDS
     echo "Waiting for Instances to be in the RUNNING state..."
@@ -92,12 +92,12 @@ if [ "$INSTANCEIDS" != "" ]
       done
   else
     echo "There are no running or pending instances in $INSTANCEIDS to wait for..."
-fi 
+#fi 
 
 # Retreive ELBv2 URL via aws elbv2 describe-load-balancers --query and print it to the screen
 #https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elbv2/describe-load-balancers.html
-URL=$(aws elbv2 describe-load-balancers --query='LoadBalancers[].DNS' --output=text )
-echo $URL
+#URL=$(aws elbv2 describe-load-balancers --query='LoadBalancers[].DNS' --output=text )
+#echo $URL
 
 # end of outer fi - based on arguments.txt content
 fi
