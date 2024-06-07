@@ -36,10 +36,10 @@ echo $SUBNET2B
 
 echo 'Creating the TARGET GROUP and storing the ARN in $TARGETARN...'
 # https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/create-target-group.html
-TARGETARN=$(aws elbv2 create-target-group --name $8 --protocol HTTP --port 80 --target-type instance --vpc-id vpc-eaed8283)
+TARGETARN=$(aws elbv2 describe-target-groups --output=text --query='TargetGroups[].[TargetGroupArn]' --filter "Name=TargetGroupArn,Values=${8}" )
 echo $TARGETARN
 # aws elbv2 create-target-group --name $8 --protocol HTTP --port 80 --target-type instance --vpc-id vpc-eaed8283 --output=text
-#aws elbv2 describe-target-groups --query 'TargetGroups[].[TargetGroupArn]' --names $8 --output=text
+#
 
 echo "Creating ELBv2 Elastic Load Balancer..."
 #https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/create-load-balancer.html
@@ -49,7 +49,7 @@ echo $ELBARN
 # AWS elbv2 wait for load-balancer available
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elbv2/wait/load-balancer-available.html
 echo "Waiting for load balancer to be available..."
-aws elbv2 wait load-balancer-available --load-balancer-arns $ELBARN --output=text
+aws elbv2 wait load-balancer-available --load-balancer-arns $ELBARN 
 echo "Load balancer available..."
 # create AWS elbv2 listener for HTTP on port 80
 #https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elbv2/create-listener.html
