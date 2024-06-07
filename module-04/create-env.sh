@@ -20,7 +20,7 @@
 
 if [ $# = 0 ]
 then
-  echo 'You do not have enough variable in your arugments.txt, perhaps you forgot to run: bash cd mod'
+  echo 'You do not have enough variable in your arugments.txt, perhaps you forgot to run: bash run: bash ./create-env.sh $(< ~/arguments.txt)'
   exit 1
 else
 echo "Finding and storing default VPCID value..."
