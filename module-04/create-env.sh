@@ -18,11 +18,11 @@
 # 11 Availability Zone 2
 ##############################################################################
 
-if [ $# = 0 ]
-then
+#if [ $# = 0 ]
+#then
   echo 'You do not have enough variable in your arugments.txt, perhaps you forgot to run: bash run: bash ./create-env.sh $(< ~/arguments.txt)'
   exit 1
-else
+#else
 echo "Finding and storing default VPCID value..."
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-vpcs.html
 VPCID=$(aws ec2 describe-vpcs --filters "Name=is-default,Values=true" --query "Vpcs[*].VpcId" --output=text)
