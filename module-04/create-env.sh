@@ -72,7 +72,7 @@ echo $TARGETARN
 
 # Collect Instance IDs
 # https://stackoverflow.com/questions/31744316/aws-cli-filter-or-logic
-INSTANCEIDS=$(aws ec2 describe-instances --output=text --query 'Reservations[*].Instances[*].InstanceId' --filter "Name=instance-state-name,Values=running,pending")
+#INSTANCEIDS=$(aws ec2 describe-instances --output=text --query 'Reservations[*].Instances[*].InstanceId' --filter "Name=instance-state-name,Values=running,pending")
 
 #https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/wait/instance-running.html
 #echo "Waiting until instances are in the RUNNING state..."
@@ -100,4 +100,4 @@ INSTANCEIDS=$(aws ec2 describe-instances --output=text --query 'Reservations[*].
 #echo $URL
 
 # end of outer fi - based on arguments.txt content
-fi
+#fi
