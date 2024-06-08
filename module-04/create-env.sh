@@ -49,7 +49,7 @@ aws elbv2 create-load-balancer --name $9 --subnets $SUBNET2A $SUBNET2B --output=
 ELBARN=$(aws elbv2 describe-load-balancers --query "LoadBalancers[?LoadBalancerName=='$9'].LoadBalancerArn" --output=text)
 echo $ELBARN
 
-AWS elbv2 wait for load-balancer available
+#AWS elbv2 wait for load-balancer available
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elbv2/wait/load-balancer-available.html
 echo "Waiting for load balancer to be available..."
 aws elbv2 wait load-balancer-available --load-balancer-arns $ELBARN 
@@ -91,7 +91,7 @@ if [ "$INSTANCEIDS" != "" ]
     INSTANCEIDSARRAY=($INSTANCEIDS)
     for INSTANCEID in ${INSTANCEIDSARRAY[@]};
       do
-      aws elbv2 register-targets --target-group-arn $TARGETARN --targets $INSTANCEIDS
+      aws elbv2 register-targets --target-group-arn $TARGETARN --targets ID=$INSTANCEIDS
       done
   else
     echo "There are no running or pending instances in $INSTANCEIDS to wait for..."
