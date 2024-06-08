@@ -91,7 +91,7 @@ if [ "$INSTANCEIDS" != "" ]
     INSTANCEIDSARRAY=($INSTANCEIDS)
     for INSTANCEID in ${INSTANCEIDSARRAY[@]};
       do
-      aws elbv2 register-targets --target-group-arn $TARGETARN --targets ID=${INSTANCEIDSARRAY[@]}
+      aws elbv2 register-targets --target-group-arn $TARGETARN --targets Id="$INSTANCEID"
       #--targets "Key=instanceids,Values=$instance_id"
       done
   else
