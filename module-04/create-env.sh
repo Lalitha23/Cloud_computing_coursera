@@ -70,7 +70,7 @@ aws ec2 run-instances \
     --count $5 \
     --key-name $3 \
     --security-group-ids $4 \
-    --user-data file://$6 \
+    --user-data - file://$6 \
     --tag-specifications "ResourceType=instance,Tags=[{Key=module,Value=$7}]"
 
 # Collect Instance IDs
