@@ -91,7 +91,8 @@ if [ "$INSTANCEIDS" != "" ]
     INSTANCEIDSARRAY=($INSTANCEIDS)
     for INSTANCEID in ${INSTANCEIDSARRAY[@]};
       do
-      aws elbv2 register-targets --target-group-arn $TARGETARN --targets ID=$INSTANCEIDS
+      aws elbv2 register-targets --target-group-arn $TARGETARN --targets ID=${INSTANCEIDS}
+      #--targets "Key=instanceids,Values=$instance_id"
       done
   else
     echo "There are no running or pending instances in $INSTANCEIDS to wait for..."
