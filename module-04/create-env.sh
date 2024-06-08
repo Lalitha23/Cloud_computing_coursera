@@ -46,7 +46,7 @@ echo $TARGETARN
 echo "Creating ELBv2 Elastic Load Balancer..."
 #https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/create-load-balancer.html 
 aws elbv2 create-load-balancer --name $9 --subnets $SUBNET2A $SUBNET2B --output=text
-ELBARN=$()
+ELBARN=$(aws elbv2 describe-load-balancers --query "LoadBalancers[?LoadBalancerName=='$9'].LoadBalancerArn" --output=text)
 echo $ELBARN
 
 AWS elbv2 wait for load-balancer available
@@ -99,7 +99,7 @@ fi
 
 # Retreive ELBv2 URL via aws elbv2 describe-load-balancers --query and print it to the screen
 #https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elbv2/describe-load-balancers.html
-URL=$(aws elbv2 describe-load-balancers --query='LoadBalancers[].DNS' --output=text )
+URL=$(aws elbv2 describe-load-balancers --query "LoadBalancers[?LoadBalancerName=='$ELBARN'].DNSName" --output=text )
 echo $URL
 
 # end of outer fi - based on arguments.txt content
