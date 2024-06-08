@@ -94,6 +94,7 @@ if [ "$INSTANCEIDS" != "" ]
       aws elbv2 register-targets --target-group-arn $TARGETARN --targets Id=$INSTANCEID
       #--targets "Key=instanceids,Values=$instance_id"
       done
+      echo "Registering targets complete"
   else
     echo "There are no running or pending instances in $INSTANCEIDS to wait for..."
 fi 
