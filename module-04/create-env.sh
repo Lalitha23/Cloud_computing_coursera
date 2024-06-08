@@ -73,7 +73,7 @@ aws ec2 run-instances \
     --user-data file://$6 \
     --tag-specifications "ResourceType=instance,Tags=[{Key=module,Value=$7}]"
 
- Collect Instance IDs
+# Collect Instance IDs
 # https://stackoverflow.com/questions/31744316/aws-cli-filter-or-logic
 INSTANCEIDS=$(aws ec2 describe-instances --output=text --query 'Reservations[*].Instances[*].InstanceId' --filter "Name=instance-state-name,Values=running,pending")
 
