@@ -20,7 +20,7 @@ fi
 
 echo "Finding TARGETARN..."
 # https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/describe-target-groups.html
-TARGETARN=$(aws elbv2 describe-target-groups --query "TargetGroups[?TargetGroupName=='$8'].TargetGroupArn" --output=text)
+TARGETARN=$(aws elbv2 describe-target-groups --query "TargetGroups[].TargetGroupArn" --output=text)
 echo $TARGETARN
 
 if [ "$INSTANCEIDS" != "" ]
@@ -32,7 +32,7 @@ if [ "$INSTANCEIDS" != "" ]
     for INSTANCEID in ${INSTANCEIDSARRAY[@]};
       do
       echo "Deregistering target $INSTANCEID..."
-      aws elbv2 deregister-targets 
+      aws elbv2 deregister-targets --target-group-arn $TARGETARN --targets Id=$INSTANCEID
       echo "Waiting for target $INSTANCEID to be deregistered..."
       aws elbv2 wait target-deregistered
       done
@@ -54,7 +54,7 @@ fi
 
 echo "Looking up ELB ARN..."
 # https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/describe-load-balancers.html
-ELBARN=$(aws elbv2 describe-load-balancers --query "LoadBalancers[?LoadBalancerName=='$9'].LoadBalancerArn" --output=text)
+ELBARN=$(aws elbv2 describe-load-balancers --query "LoadBalancers[].LoadBalancerArn" --output=text)
 echo $ELBARN
 
 # Collect ListenerARN
