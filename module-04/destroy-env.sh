@@ -44,9 +44,9 @@ fi
 echo "Now terminating the detached INSTANCEIDS..."
 if [ "$INSTANCEIDS" != "" ]
   then
-    aws ec2 terminate-instances
+    aws ec2 terminate-instances --instance-ids $INSTANCEID
     echo "Waiting for all instances report state as TERMINATED..."
-    aws ec2 wait instance-terminated
+    aws ec2 wait instance-terminated --instance-ids $INSTANCEID
     echo "Finished destroying instances..."
   else
     echo 'There are no running values in $INSTANCEIDS to be terminated...'
