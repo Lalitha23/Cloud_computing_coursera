@@ -90,11 +90,11 @@ if [ "$ELBARN" = "" ];
 else
   echo "Issuing Command to delete Load Balancer.."
   # https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/delete-load-balancer.html
-  aws elbv2 delete-load-balancer 
+  aws elbv2 delete-load-balancer --load-balancer-arn $ELB
   echo "Load Balancer delete command has been issued..."
 
   echo "Waiting for ELB to be deleted..."
   # https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/wait/load-balancers-deleted.html#examples
-  aws elbv2 wait load-balancers-deleted
+  aws elbv2 wait load-balancers-deleted --load-balancer-arn $ELB
 fi
 
