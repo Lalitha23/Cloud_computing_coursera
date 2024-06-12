@@ -62,6 +62,7 @@ echo "Launch Template created..."
 
 # Retreive the Launch Template ID using a --query
 LAUNCHTEMPLATEID=$(aws ec2 describe-launch-templates --query='LaunchTemplates[*].LaunchTemplateId' --output=text)
+echo $LAUNCHTEMPLATEID
 #--filter "Name=LaunchTemplateName,Values={$12}")
 
 echo 'Creating the TARGET GROUP and storing the ARN in $TARGETARN'
@@ -103,7 +104,7 @@ aws autoscaling create-auto-scaling-group \
     --min-size $14 \
     --max-size $15 \
     --desired-capacity $16 \
-    --vpc-zone-identifier $SUBNET2A
+    --availability-zones $SUBNET2A $SUBNET2B
 
 echo 'Waiting for Auto Scaling Group to spin up EC2 instances and attach them to the TargetARN...'
 # Create waiter for registering targets
