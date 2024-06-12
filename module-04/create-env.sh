@@ -60,6 +60,7 @@ echo "Creating the AutoScalingGroup Launch Template..."
 aws ec2 create-launch-template --launch-template-name $12 --launch-template-data file://config.json --region $17
 echo "Launch Template created..."
 
+# aws ec2 create-launch-template --launch-template-name TemplateForAutoScaling --launch-template-data '{ "NetworkInterfaces": [ { "DeviceIndex": 0, "AssociatePublicIpAddress": true, "Groups": [ "sg-0f3e13389c52942b2" ], "SubnetId": "subnet-e9a0dd80", "DeleteOnTermination": true } ], "ImageId": "ami-09040d770ffe2224f", "InstanceType": "t2.micro", "KeyName": "coursera-key", "UserData": "IyEvYmluL2Jhc2gKCiMgU2FtcGxlIGNvZGUgdG8gaW5zdGFsbCBOZ2lueCB3ZWJzZXJ2ZXIKCnN1ZG8gYXB0IHVwZGF0ZQpzdWRvIGFwdCBpbnN0YWxsIC15IG5naW54CgpzdWRvIHN5c3RlbWN0bCBlbmFibGUgLS1ub3cgbmdpbng=", "Placement": { "AvailabilityZone": "us-east-2a" },"TagSpecifications":[{"ResourceType":"instance","Tags":[{"Key":"module","Value": "module3-tag" }]}] }' --region $17
 # Retreive the Launch Template ID using a --query
 LAUNCHTEMPLATEID=$(aws ec2 describe-launch-templates --query='LaunchTemplates[*].LaunchTemplateId' --output=text)
 echo $LAUNCHTEMPLATEID
@@ -101,6 +102,9 @@ echo 'Creating Auto Scaling Group...'
 aws autoscaling create-auto-scaling-group \
     --auto-scaling-group-name $13 \
     --launch-template LaunchTemplateId=$LAUNCHTEMPLATEID \
+    --target-group-arns $TARGETARN \
+    --health-check-type EC2 \
+    --health-check-grace-period 600 \
     --min-size $14 \
     --max-size $15 \
     --desired-capacity $16 \
