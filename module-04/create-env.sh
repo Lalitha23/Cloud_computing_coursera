@@ -57,7 +57,10 @@ echo $SUBNET2B
 # Create AWS EC2 Launch Template
 # https://awscli.amazonaws.com/v2/documentation/api/2.0.33/reference/ec2/create-launch-template.html
 echo "Creating the AutoScalingGroup Launch Template..."
-aws ec2 create-launch-template --launch-template-name $12 --launch-template-data file://config.json --region $17
+aws ec2 create-launch-template \
+  --launch-template-name $12 \
+  --launch-template-data file://config.json \
+  --region $17
 echo "Launch Template created..."
 
 # aws ec2 create-launch-template --launch-template-name TemplateForAutoScaling --launch-template-data '{ "NetworkInterfaces": [ { "DeviceIndex": 0, "AssociatePublicIpAddress": true, "Groups": [ "sg-0f3e13389c52942b2" ], "SubnetId": "subnet-e9a0dd80", "DeleteOnTermination": true } ], "ImageId": "ami-09040d770ffe2224f", "InstanceType": "t2.micro", "KeyName": "coursera-key", "UserData": "IyEvYmluL2Jhc2gKCiMgU2FtcGxlIGNvZGUgdG8gaW5zdGFsbCBOZ2lueCB3ZWJzZXJ2ZXIKCnN1ZG8gYXB0IHVwZGF0ZQpzdWRvIGFwdCBpbnN0YWxsIC15IG5naW54CgpzdWRvIHN5c3RlbWN0bCBlbmFibGUgLS1ub3cgbmdpbng=", "Placement": { "AvailabilityZone": "us-east-2a" },"TagSpecifications":[{"ResourceType":"instance","Tags":[{"Key":"module","Value": "module3-tag" }]}] }' --region $17
