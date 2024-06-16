@@ -1,1 +1,1 @@
-{"Name": "module-2-assessment-create-script", "gtotal": 1.0, "datetime": "20240527201150", "sha": "390426186b2c490030f82211fa26b66715949f5c68420297e26a41589eff9ff2"}
+{"Name": "module-2-assessment-create-script", "gtotal": 0.75, "datetime": "20240615225815", "sha": "0b0a0e9b8a9d01a5267f559d56eabc87fb78c75d574eb3278a27e225677dc088"}
