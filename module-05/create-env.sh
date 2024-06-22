@@ -92,16 +92,18 @@ echo 'Creating Auto Scaling Group...'
 # Create Autoscaling group ASG - needs to come after Target Group is created
 # Create autoscaling group
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/autoscaling/create-auto-scaling-group.html
-#aws autoscaling create-auto-scaling-group 
-#   --auto-scaling-group-name lpautoscale \
-  #  --launch-template LaunchTemplateId=lt-03306096fd7b0fd52 \
-   # --target-group-arns arn:aws:elasticloadbalancing:us-east-2:506303318505:targetgroup/lpcoursera-tg1/18045549abf48b96 \
-    #--health-check-type EC2 \
-   # --health-check-grace-period 600 \
-   # --min-size $14 \
-   # --max-size  $15 \
-   # --desired-capacity $16 \
-   # --availability-zones us-east-2a
+aws autoscaling create-auto-scaling-group \
+  --auto-scaling-group-name $13 \
+  --launch-template LaunchTemplateId=$LAUNCHTEMPLATEID \
+  --target-group-arns arn:aws:elasticloadbalancing:us-east-2:506303318505:targetgroup/lpcoursera-tg1/18045549abf48b96 \
+  --health-check-type EC2 \
+  --health-check-grace-period 600 \
+  --min-size $14 \
+  --max-size  $15 \
+  --desired-capacity $16 \
+  --availability-zones us-east-2a
+
+  aws autoscaling describe-auto-scaling-groups
 
 echo 'Waiting for Auto Scaling Group to spin up EC2 instances and attach them to the TargetARN...'
 # Create waiter for registering targets
