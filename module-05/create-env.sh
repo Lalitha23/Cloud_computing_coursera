@@ -124,11 +124,11 @@ fi
 # Add S3api commands to create two S3 buckets
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/index.html
 echo "Creating S3 bucket: ${19}..."
-aws s3api create-bucket 
+aws s3api create-bucket --bucket ${19} --region ${18}
 echo "Created S3 bucket: ${19}..."
 
 echo "Creating S3 bucket: ${20}..."
-aws s3api create-bucket 
+aws s3api create-bucket --bucket ${20} --region ${18}
 echo "Created S3 bucket: ${20}..."
 
 # S3 commands
