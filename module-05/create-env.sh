@@ -94,7 +94,7 @@ echo 'Creating Auto Scaling Group...'
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/autoscaling/create-auto-scaling-group.html
 aws autoscaling create-auto-scaling-group \
   --auto-scaling-group-name $13 \
-  --launch-template LaunchTemplateId=$LAUNCHTEMPLATEID, Version='$Latest' \
+  --launch-template LaunchTemplateId=$LAUNCHTEMPLATEID,Version='1' \
   --target-group-arns $TARGETARN \
   --health-check-type EC2 \
   --health-check-grace-period 600 \
