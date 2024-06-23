@@ -95,7 +95,6 @@ echo 'Creating Auto Scaling Group...'
 aws autoscaling create-auto-scaling-group \
   --auto-scaling-group-name ${13} \
   --launch-template LaunchTemplateId=${LAUNCHTEMPLATEID}\
-  --load-balancer-names $ELBARN \
   --target-group-arns $TARGETARN \
   --health-check-grace-period 600 \
   --min-size ${14} \
