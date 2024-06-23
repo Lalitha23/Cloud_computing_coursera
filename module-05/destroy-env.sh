@@ -85,7 +85,7 @@ fi
 
 echo "Looking up ELB ARN..."
 # https://awscli.amazonaws.com/v2/documentation/api/2.0.34/reference/elbv2/describe-load-balancers.html
-ELBARN=
+ELBARN=$(aws elbv2 describe-load-balancers --query "LoadBalancers[?LoadBalancerName=='$9'].LoadBalancerArn" --output=text)
 echo $ELBARN
 
 # Collect ListenerARN
