@@ -94,14 +94,13 @@ echo 'Creating Auto Scaling Group...'
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/autoscaling/create-auto-scaling-group.html
 aws autoscaling create-auto-scaling-group \
   --auto-scaling-group-name $13 \
-  --launch-template LaunchTemplateName=$12,Version='1' \
+  --launch-template LaunchTemplateId='$LAUNCHTEMPLATEID' \
+  --load-balancer-names $ELBARN \
   --target-group-arns $TARGETARN \
-  --health-check-type EC2 \
   --health-check-grace-period 600 \
   --min-size $14 \
   --max-size  $15 \
   --desired-capacity $16 \
-  --availability-zones us-east-2a
 
   aws autoscaling describe-auto-scaling-groups
 
