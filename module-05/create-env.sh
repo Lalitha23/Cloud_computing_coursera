@@ -92,7 +92,7 @@ echo 'Creating Auto Scaling Group...'
 # Create Autoscaling group ASG - needs to come after Target Group is created
 # Create autoscaling group
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/autoscaling/create-auto-scaling-group.html
-aws autoscaling create-auto-scaling-group \
+echo "aws autoscaling create-auto-scaling-group \
   --auto-scaling-group-name $13 \
   --launch-template LaunchTemplateId=${LAUNCHTEMPLATEID}\
   --load-balancer-names $ELBARN \
@@ -100,9 +100,11 @@ aws autoscaling create-auto-scaling-group \
   --health-check-grace-period 600 \
   --min-size $14 \
   --max-size  $15 \
-  --desired-capacity $16 \
+  --desired-capacity $16"
 
-  aws autoscaling describe-auto-scaling-groups
+ 
+
+  #aws autoscaling describe-auto-scaling-groups
 
 echo 'Waiting for Auto Scaling Group to spin up EC2 instances and attach them to the TargetARN...'
 # Create waiter for registering targets
