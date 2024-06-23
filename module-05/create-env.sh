@@ -92,15 +92,15 @@ echo 'Creating Auto Scaling Group...'
 # Create Autoscaling group ASG - needs to come after Target Group is created
 # Create autoscaling group
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/autoscaling/create-auto-scaling-group.html
-echo "aws autoscaling create-auto-scaling-group \
-  --auto-scaling-group-name $13 \
+aws autoscaling create-auto-scaling-group \
+  --auto-scaling-group-name ${13} \
   --launch-template LaunchTemplateId=${LAUNCHTEMPLATEID}\
   --load-balancer-names $ELBARN \
   --target-group-arns $TARGETARN \
   --health-check-grace-period 600 \
-  --min-size $14 \
-  --max-size  $15 \
-  --desired-capacity $16"
+  --min-size ${14} \
+  --max-size  ${15} \
+  --desired-capacity ${16}
 
  
 
