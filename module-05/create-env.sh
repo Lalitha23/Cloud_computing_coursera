@@ -103,7 +103,8 @@ aws autoscaling create-auto-scaling-group \
 
  
 
-  #aws autoscaling describe-auto-scaling-groups
+aws autoscaling describe-auto-scaling-groups \
+    --auto-scaling-group-name ${13}
 
 echo 'Waiting for Auto Scaling Group to spin up EC2 instances and attach them to the TargetARN...'
 # Create waiter for registering targets
